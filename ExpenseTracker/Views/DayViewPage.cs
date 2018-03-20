@@ -51,6 +51,12 @@ namespace ExpenseTracker.Views
                         FontSize = Styles.FontSmall
                     };
                     lblDescription.SetBinding(Label.TextProperty, "Description");
+                    var lblDateTime = new Label
+                    {
+                        TextColor = Colors.Black50,
+                        FontSize = Styles.FontSmall
+                    };
+                    lblDateTime.SetBinding(Label.TextProperty, "DateTime", stringFormat: "{0:hh:mm tt}");
                     var lblAmount = new Label
                     {
                         TextColor = Colors.Blue75,
@@ -68,11 +74,14 @@ namespace ExpenseTracker.Views
                         },
                         RowDefinitions =
                         {
-                            new RowDefinition { Height = new GridLength(1, GridUnitType.Star) }
+                            new RowDefinition { Height = new GridLength(1, GridUnitType.Star) },
+                            new RowDefinition { Height = new GridLength(1, GridUnitType.Auto) }
                         }
                     };
                     grid.Children.Add(lblDescription);
+                    grid.Children.Add(lblDateTime, 0, 1);
                     grid.Children.Add(lblAmount, 1, 0);
+                    Grid.SetRowSpan(lblAmount, 2);
 
                     return new ViewCell
                     {
